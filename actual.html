@@ -321,7 +321,7 @@ function displayItems() {
     });
     if (items.length > 0) {
         buttonsContainer.innerHTML = `
-            <button class="buy" onclick="openModal('buyform')">Buy</button>
+            <button class="buy" onclick="see()">Buy</button>
             <button class="clear" onclick="closeModal('cartModal')">Cancel</button>
         `;
         cartFooter.innerHTML = `Total Cost: ₹${totalCost}`;
@@ -330,10 +330,18 @@ function displayItems() {
         cartFooter.innerHTML = '';
     }
 }
+    function see() {
+    const x = document.getElementById('log').innerHTML.trim();
+    if (x === 'Admin') {
+        openModal('buyform');
+    } else {
+        alert('Login to purchase');
+    }
+}
 window.onload = function () {
     const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
     const savedOrders = JSON.parse(localStorage.getItem('orders')) || [];
-
+    const savedLoginStatus = localStorage.getItem('loggedInUser');
     if (savedCart.length) {
         items = savedCart.map(item => item.name);
         costs = savedCart.map(item => item.cost);
@@ -341,6 +349,10 @@ window.onload = function () {
     }
     if (savedOrders.length) {
         orders = savedOrders;
+    }
+    if (savedLoginStatus) {
+        document.getElementById('log').innerHTML = savedLoginStatus;
+        document.getElementById('used').innerHTML = 'Logout';
     }
     displayItems();
     displayOrders();
@@ -358,7 +370,12 @@ function saveCartToLocalStorage() {
 function saveOrdersToLocalStorage() {
     localStorage.setItem('orders', JSON.stringify(orders));
 }
-
+function saveLoginStatus(user) {
+    localStorage.setItem('loggedInUser', user);
+}
+function clearLoginStatus() {
+    localStorage.removeItem('loggedInUser');
+}
 function addItem(itemName, cost) {
     if (!items.includes(itemName)) {
         items.push(itemName);
@@ -456,9 +473,13 @@ function displayOrders() {
         const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value.trim();
 
-            if (username === "admin" && password === "12345678") {
+            if (username === "Admin" && password === "12345678") {
                 alert("Login successful!");
                 closeModal('loginModal');
+                let x= document.getElementById('log');
+                x.innerHTML='Admin';
+                document.getElementById('used').innerHTML = 'Logout';
+                saveLoginStatus('Admin');
                 return true;
             } else {
                 alert("Invalid username or password");
@@ -522,6 +543,16 @@ function displayOrders() {
     alert("All orders have been cleared.");
     closeModal('order');
 }
+    function find(){
+    const x = document.getElementById('log').innerHTML.trim();
+    if(x.length !=0){
+        document.getElementById('log').innerHTML = '';
+        document.getElementById('used').innerHTML = 'Login';
+        clearLoginStatus();
+    }else{
+        openModal('loginModal');
+    }
+}
 </script>
 </head>
 <body>
@@ -534,9 +565,10 @@ function displayOrders() {
         <input type="text" placeholder="search">
     </div>
     <div class="nav-links">
+        <p id="log"></p>
         <a href="#" onclick="openModal('cartModal')">Cart</a>
         <a href="#" onclick="openModal('order')">Orders</a>
-        <a href="#" onclick="openModal('loginModal')">Login</a>
+        <a href="#" id="used" onclick="find()">Login</a>
     </div>
 </div>
 <div class="banner">
