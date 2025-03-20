@@ -11,8 +11,9 @@
         body {
             background-color: aliceblue;
             font-family: 'Trebuchet MS', Arial, sans-serif;
-            color: #333;
+            color: rgb(51, 51, 51);;
         }
+        
         .head {
             display: flex;
             align-items: center;
@@ -73,46 +74,39 @@
             gap: 20px;
             margin: 30px;
         }
-        .cart, .main {
+         .main {
             border-radius: 8px;
             background-color: rgb(208, 224, 239);
             padding: 15px;
-        }
-        .cart {
-            width: 30%;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        .main {
-    width: 68%;
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
-    max-height: 400px;
-    overflow-y: auto;  
-        }
-        .product {
+    gap: 20px; 
+    justify-content: center; 
+    margin: 30px auto; 
+    max-width: 100%; 
+}
+.product {
+    flex: 1 1 calc(20% - 20px); 
+    max-width: 200px;
+    min-width: 150px; 
+    height: 180px;
+    padding: 20px;
     background-color: white;
     border-radius: 10px;
-    padding: 15px;
-    transition: all 0.3s;
-    width: 45%;
-    height: 150px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
-.product p {
-    font-weight: bold;
-    color: #2c3e50;
-    margin-bottom: 5px;
-}
-.product .price {
-    color: #27ae60;
-    font-weight: bold;
-    margin-top: 5px;
+   transition: all 0.4s;
 }
 
+        .product p {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .product .price {
+            color: rgb(39, 174, 96);
+            font-weight: bold;
+        }
 .cart ul {
     border-radius: 8px;
     padding: 10px;
@@ -120,8 +114,8 @@
     margin-bottom: 10px;
 }
 li {
-    background-color:#ccc;
-    border: 1px solid #ddd;
+    background-color:rgb(204, 204, 204);
+    border: 1px solid rgb(221, 221, 221);
     border-radius: 6px;
     padding: 8px;
     margin-bottom: 5px;
@@ -165,7 +159,7 @@ li {
             border-radius: 4px;   
         }
         .head1 {
-            background-color: #ddd;
+            background-color: rgb(221, 221, 221);
             border-radius: 8px;
             text-align: center;
             padding: 10px;
@@ -190,27 +184,41 @@ li {
     transform: translate(-50%, -50%);
     background: white;
     padding: 20px;
-    height: auto;
-    width: auto;
+    width: 30% ;
+    height: 300px;
+    overflow-y: scroll;
     border-radius: 10px;
 }
     .modal2 button{ 
-        background-color: #2980b9;
+        background-color: rgb(41, 128, 185);
         padding: 10px; }
     .modal button{
         text-align: center;
     }
 .modal .close-btn { 
-    background-color: #e74c3c; 
+    background-color: rgb(231, 76, 60); 
     color: white; 
     border: none; 
     width: 100%; 
     margin-top: 10px; 
     padding: 8px; 
  }
-.modal .close-btn:hover { background-color: #c0392b; }
+ .modal3 {
+    background-color: rgb(208, 224, 239);
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    width: 30% ;
+    height: 300px;
+    overflow-y: scroll;
+    border-radius: 10px;
+}
         .login-container { 
-            background: #fff; 
+            background: rgb(255, 255, 255); 
             padding: 20px; 
             border-radius: 8px; 
             width: 100%;
@@ -227,7 +235,7 @@ li {
 }
         h2 { 
             text-align: center; 
-            color: #2c3e50; 
+            color: rgb(44, 62, 80); 
         }
         input { 
             width: 100%; 
@@ -238,11 +246,11 @@ li {
         }
         button { 
             background-color:rgb(52, 123, 211); 
-            color: #fff; 
+            color: rgb(255, 255, 255); 
             border: none; 
         }
         button:hover { 
-            background-color: #2980b9; 
+            background-color: rgb(44, 62, 80); 
         }
         .links { 
             display: flex; 
@@ -251,7 +259,7 @@ li {
         }
         .links a { 
             text-decoration: none; 
-            color: #3498db; 
+            color: rgb(52, 128, 219); 
         }
         .links a:hover { 
             text-decoration: underline; 
@@ -281,13 +289,13 @@ li {
 .search-bar input {
     width: 250px;  
     padding: 8px 12px;
-    border: 2px solid #3498db; 
+    border: 2px solid rgb(52, 152, 219); 
     border-radius: 20px;
-    background-color: #f9f9f9; 
-    color: #333;
+    background-color: rgb(249, 249, 249); 
+    color: rgb(51, 51, 51);
 }
 .search-bar input::placeholder {
-    color: #888;
+    color: rgb(136, 136, 136);
 }
     </style>
 <script>
@@ -305,7 +313,7 @@ function displayItems() {
         const li = document.createElement('li');
         li.innerHTML = `
             ${task} ₹${costs[index]} 
-            <input class="bb" type="number" min="1" max="50" value="${quantities[index]}" onchange="updateQuantity(${index}, this.value)">
+            <input class="bb" type="number" min="1" value="${quantities[index]}" onchange="updateQuantity(${index}, this.value)">
             <button class="remove-btn" onclick="removeItem(${index})">Remove</button>`;
         taskList.appendChild(li);
 
@@ -519,13 +527,14 @@ function displayOrders() {
 <body>
 <div class="head">
     <div class="logo-container">
-        <img class="headimg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAkFBMVEX////mOUbmNEHmN0TqZm7lMD/ug4rmNUPnQEzlKDjlLTzlLz3lJDX1wMPrbHTlKjrkHTDoU13pXGXvkJXseH/xn6Tui5H+9fbwl5z++vrpWWPpVV/rcXnoTlnkFSrraXH3zc/tfIPyp6vzrrL86uv0t7r64OH519n2xcj52dvnRVHwlZr2wcTxoqfkDib0ubyK+hPrAAAJz0lEQVR4nO2dDXeiOhCGlRgxkErqJ7ZqVfCj7br+/393hYCCksCmgYTevOfsnrbWkkdCMpnMTDodIyMjIyMjIyMjIyMjIyMjIyMjIyMjI6PfqPAS7KZT/6rxbDaO1Jep2bPGhTp/1oL3MkEEeY7juLEg/Q/KkPsg/quu62Cnv5GMF44RgqCrjYCLB4FMvuXa1QiPCiDrJAvQX0PVOIUCZLmQwTdfIdUoTLnd8OeAoWOp5uDIJscfAyJbNQVXYL35GeDc0hswQjz8iPBN5y5KBeBPhpupvoPMXfBDHDBcq259JeGLMGFP/z4aCTiigEeiuu0V5Z0FCYftuIWRlSoGGLblFl6fxBchwp2juuGVBZdChK+6T/YZEZE5cd6eTnrtpiILqQ1W3ezrEGJblmVXWJo6IqPpzqufgCsAMXofDnsrj6CyBSqcCRCO3UY4mHLxLHU4zU8Twm8NnAgQ9pUu7AGZzbOtmfcJr7NaQwHCicr5Hnibx/ZsPE6D7J4A4VIlISrwiIZddousdwFCpTab/VUwwYVsf6a9agehhW6DJoybfPzeTibbabqKZy8F7C8Bwo/GCb3R6dRPIeCoE45I7P52yDAZdb5ZhiQQIWx8cYi20WVPqaHhfri3FkAvuY0Oo5+CgQDhqGGzlAJm+k7WlgGYOkZZqwH1hLYd2V9WtM8SbbU4V3lebvhPAR9mKYixF5Fab/GLLGNZjFBeL4V4NeoNh5PJJNpDG39/+9PpOQiCj7vp66Xrn88cA/QPx8CNPmuyiV9mOP9AV4BQniPR7bOusUt9ee4o+ck8/6RZkTW2GFwRLfoRMOwQIcJ3ab2UzJkXGVCe22Afw2SFIsRPHG01xb+wLbYlAVBJCDD7Il/0Ijid8V6fAFB076Kpnn5ODGtZiFDaEp83Cqzii9w8SW+39nuEELpl4l2N6m5EGI+mMu+hNEKeRUUJu4R+N0qXSIAE4Tw8reLvnV48glJHBYvQVkr4WkroxTvWvXSyA+me2TDmsaKfJz2BsR4QIlxJI+TY/enHiKeb4/AGeHssO3db26WreMYsDSyVhMlkzSXsOhin/c9G943d6c2GWdMfesVmm9p7aI3YFykYsEEG8O4OI7v4+yPDPaa4l/IInx6rTBfNEKHEaBgyXCtqeymP8MlwygOmlnZq032yFoj6Ej4avw+Ac7q+cNI90C9WmzQmzF8EkLx/ZhV/AE76B7bMnZTWEKJ97tUPNwd4ZnvhFRNyPH293EUAzL24RTnAPWcjRYhQmuXNmw/zrpK8X3eGc4AnXlCBEKG0FTDPaksIAYpHFLjNvOTHgLeF44YbNaEvIXXKgMEcR4hZ+24X90k3vf/HNXcHSl9C6pSF484snsrJzZwJ8oAH7q6FzoR0qeBMk9AdKx2UgnUOMMQle4gaE8a3LtrfTL76iO+iH99BmHbaEJVtkupO6O0iPyEdbMjqbUWcB8DSYV0xIWd9SF1n8QL4JZnu7MQTfAeE5fOWGGETK+AMYWeam9Hd9F1zu8JH/WAraErYmWZmBJg6d+bdKu1IfI0aElLHUkLY2XipaW2l+4eLQbWHBQsE1DRJmBrcixmJNzPugF8Vowk4Ptn6CXk70JQQZQJE91dDDqRddPFVdbhTS8ixvKkLG07O05vOK2AvfT/+8r1yPIhSQt76MHHSQ+cmN8rOsekGnFO9CWrvIWd9OJMVlqSWkBMaOZYVlqSUMLfqe5AvK4ZVKaH7zb7IuQWEoEz2X07s5/EvtK6GaIkUEroEe9C2uwOeuDHYl+1w9Mp9+2DACjFpgNDzQykJgCUqW+DXRygUTCYi1n5M7YRwLJ2lWBVCzushdKbSWYqljlA0GedfpY5wJ52lWMoIPZkZ8TwZQkPIULsI6/FEGUJpMoSGkKF2zfi/n1Bktuj9fsJSd3PbCcuzggyhNNVEWJ679j8gbPkKWCPCCvUraiJsyk+jjND1pbMU61CPN7ECoUiav4gqlHeoh1Ao6U9EfvkuYz2EXftrdg6C/f6FpdNmsympxBkePo/HTaLT/a37/T64anf2x8sK9bhqIuwC6Hge4ghjTLrs5LzOYkBwRvk3e5EcB1aJVqiLsJIQxzAIZBVQUUrIG5AqPGHVpJTQ4tQd6f8OQk7dEUY64b+rQUIrUwGYbmzyok2kFVBpjhBvM4WcVzEiL2KofYQkZ6rS9vMIl23rpSRvqdI4dV7+obSHvSHCB8CUkBO51zJC/BgaRPsgj1BaiZhGCPFT4EL5PWwVIX42XYalhNKK4DRAWACY3KFfQoiL6pf0fhEhKizQQjcGfgUhKg4hpZs7vFj9thAixuqBVkyokGGpO6HHCHNOqoGXZ1jqTugw1g67NFWr7YQswH2auNt2QsgYKf/cMpNbTmgxomgzqdftJrS7xWHQ2dTrVhMCUnwKymc2MrvVhHhf+NZ86Hmb50NG3t0hn1veZkK8KXrjY/J8iwmLixU+Jc83QigSE1Vh/7Aooek5eV5bwvJa0KggoSl8zorkEspKH6uHsGCqCL3nJjdBKJStXoHw6T2HovoO7SV8/quHwhIkvPQoWUmOYoRlDvenofSzOMesvYSPLT8ykuh4hLJK+dZEmLdoTqw6R7xq4rLKbQFPhLDs413nJgufGbfEC0qRVSS1FsJ1ptTDIgDsE014R2p9STr8U+jYrhJCkgbqhyd/RBhlRZNfZV9koC8hSeISL4SgsuIOmHlC4UJWsInQqV3cDeh0I+3CL6NGZb0z8qEX0gIVhGoM8QjTEJlLteMDLWu1en1/G13VSzUarRwi7Sgb6YSI5ti/VD0fEdjR0QF2LIvKtquc41RVQoTcHrSOylFzazU2KyFC5mlIwKK1YjUCFCRkBGSBQVRXFDiBTueyCdWCZhXHcc6dZYzYLANfQnX1Z4xeGp1RsFR9JtujhMKVGeV/aMUgpcddFUiMsLiXoj/X1wJZ9qQsCZ339F1MiDvzKSytttm0eDvpTBWH74LBjFSpiNOwhE6WmxYPlkDpoYEsCR21Kq1IVROCzOOIONrrNiPwJJSCddDJZikTEjrymH3aoH7iHCnFEcuo0VC8YHmOmMdl6CdUvBddKmmnI9QusU7a6fzR4FTnShKaK2IxDz3RTOviiJAK2rTjSXSEb+F1kaT45OpKAu4Pijcu3BbMieuNOOB1xtDI28QQ/mFG+V53REYA9j8o0BsRiSybnu6ivs8iIFJKAhy6uq6jILmUN7+SvtcaOi661u24bgma+wjr5T+0nfXwKI0v1mlJsOe4rgvdW56vpUguIquzsKXG0XE3/fbHs/G43+9vo3+T5XISKfv/8KNXu/qXOvCMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjNTqP7xa5GlCviaFAAAAAElFTkSuQmCC" alt="Logo">
+        <img class="headimg" src="c:\Users\SAI\OneDrive\Desktop\download.png" alt="Logo">
         <h1>PharmaGo</h1>
     </div>
     <div class="search-bar">
         <input type="text" placeholder="search">
     </div>
     <div class="nav-links">
+        <a href="#" onclick="openModal('cartModal')">Cart</a>
         <a href="#" onclick="openModal('order')">Orders</a>
         <a href="#" onclick="openModal('loginModal')">Login</a>
     </div>
@@ -534,46 +543,92 @@ function displayOrders() {
     <h2>Your Health, Our Priority</h2>
     <p>Get up to 20% off on all prescription medicines & free delivery on orders above ₹2500/-</p>
 </div>
-<div class="split">
-    <div class="main">
-        <div class="head1"><h3>Medicines(Full pack)</h3></div>
-        <div class="product">
-            <p>Vitamin C</p>
-            <p class="price">₹50</p>
-            <button onclick="addItem('Vitamin C','₹50')">Add to cart</button>
-        </div>
-        <div class="product">
-            <p>Vitamin B</p>
-            <p class="price">₹100</p>
-            <button onclick="addItem('Vitamin B','₹100')">Add to cart</button>
-        </div>
-        <div class="product">
-            <p>Paracetamol</p>
-            <p class="price">₹150</p>
-            <button onclick="addItem('Paracetamol','₹150')">Add to cart</button>
-        </div>
-        <div class="product">
-            <p>Ibuprofen</p>
-            <p class="price">₹200</p>
-            <button onclick="addItem('Ibuprofen','₹200')">Add to cart</button>
-        </div>
-        <div class="product">
-            <p>Azithromycin</p>
-            <p class="price">₹350</p>
-            <button onclick="addItem('Azithromycin','₹350')">Add to cart</button>
-        </div>
-        <div class="product">
-            <p>Rantac</p>
-            <p class="price">₹50</p>
-            <button onclick="addItem('Rantac','₹50')">Add to cart</button>
-        </div>
+<div id="cartModal" class="modal3">
+    <h2 align="center">Cart</h2>
+    <ul id="list"></ul>
+    <p align="center" id="buttons">Your cart is empty</p>
+    <div id="cart-footer" class="cart-footer"></div>
+    <center>
+    <button onclick="closeModal('cartModal')">Close</button>
+    </center>
+</div>
+<div class="main">
+    <div class="head1"><h3>Medicines (Full Pack)</h3></div>
+    <div class="product">
+        <p>Vitamin C</p>
+        <p class="price">₹50</p>
+        <button onclick="addItem('Vitamin C','₹50')">Add to cart</button>
     </div>
-    <div class="cart">
-        <h2 align="center">Cart</h2>
-        <ul id="list"></ul>
-        <p align="center" id="buttons">Your cart is empty</p>
-        <div id="cart-footer" class="cart-footer"></div>
-    </div>    
+    <div class="product">
+        <p>Vitamin B</p>
+        <p class="price">₹100</p>
+        <button onclick="addItem('Vitamin B','₹100')">Add to cart</button>
+    </div>
+    <div class="product">
+        <p>Paracetamol</p>
+        <p class="price">₹150</p>
+        <button onclick="addItem('Paracetamol','₹150')">Add to cart</button>
+    </div>
+    <div class="product">
+        <p>Ibuprofen</p>
+        <p class="price">₹200</p>
+        <button onclick="addItem('Ibuprofen','₹200')">Add to cart</button>
+    </div>
+    <div class="product">
+        <p>Azithromycin</p>
+        <p class="price">₹350</p>
+        <button onclick="addItem('Azithromycin','₹350')">Add to cart</button>
+    </div>
+    <div class="product">
+        <p>Rantac</p>
+        <p class="price">₹50</p>
+        <button onclick="addItem('Rantac','₹50')">Add to cart</button>
+    </div>
+    <div class="product">
+        <p>Panadol</p>
+        <p class="price">₹80</p>
+        <button onclick="addItem('Panadol','₹80')">Add to cart</button>
+    </div>
+    <div class="product">
+        <p>Combiflam</p>
+        <p class="price">₹120</p>
+        <button onclick="addItem('Combiflam','₹120')">Add to cart</button>
+    </div>
+    <div class="product">
+        <p>Dolo 650</p>
+        <p class="price">₹60</p>
+        <button onclick="addItem('Dolo 650','₹60')">Add to cart</button>
+    </div>
+    <div class="product">
+        <p>Calpol</p>
+        <p class="price">₹110</p>
+        <button onclick="addItem('Calpol','₹110')">Add to cart</button>
+    </div>
+    <div class="product">
+        <p>Crocin</p>
+        <p class="price">₹90</p>
+        <button onclick="addItem('Crocin','₹90')">Add to cart</button>
+    </div>
+    <div class="product">
+        <p>Cetirizine</p>
+        <p class="price">₹30</p>
+        <button onclick="addItem('Cetirizine','₹30')">Add to cart</button>
+    </div>
+    <div class="product">
+        <p>Disprin</p>
+        <p class="price">₹40</p>
+        <button onclick="addItem('Disprin','₹40')">Add to cart</button>
+    </div>
+    <div class="product">
+        <p>ORS Pack</p>
+        <p class="price">₹25</p>
+        <button onclick="addItem('ORS Pack','₹25')">Add to cart</button>
+    </div>
+    <div class="product">
+        <p>Strepsils</p>
+        <p class="price">₹70</p>
+        <button onclick="addItem('Strepsils','₹70')">Add to cart</button>
+    </div>
 </div>
 <div id="loginModal" class="modal">
     <form onsubmit = "return check();">
