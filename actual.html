@@ -322,7 +322,7 @@ function displayItems() {
     if (items.length > 0) {
         buttonsContainer.innerHTML = `
             <button class="buy" onclick="openModal('buyform')">Buy</button>
-            <button class="clear" onclick="clearCart()">Cancel</button>
+            <button class="clear" onclick="closeModal('cartModal')">Cancel</button>
         `;
         cartFooter.innerHTML = `Total Cost: ₹${totalCost}`;
     } else {
